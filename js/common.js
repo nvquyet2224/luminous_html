@@ -262,13 +262,12 @@ function initApartmentDetail(index) {
 
   // Scroll to contact
   $('#btnScrollToOrder').on('click', function () {
-    $('.side-form').addClass('active');
-
+    $('.side').addClass('active');
   });
 
   // Close side form
   $('.side--close').on('click', function () {
-    $('.side-form').removeClass('active');
+    $('.side').removeClass('active');
   });
 
 
@@ -330,26 +329,10 @@ function initApartmentDetail(index) {
 
 
   // Fake book success
-  $('#orderSubmit').on('click', function () {
-
-    $('.apartment__sub--block.active').removeClass('active');
-
-    // Reset apartment__sub--block
-    $('.apartment__sub--block.block__result').addClass('active');
-
+  $('#orderSubmit, #sideSubmit').on('click', function () {
+    $('.page').addClass('blur');
+    $('.message__onpage').addClass('active');
   });
-
-  // Close success popup in apartment and back to block_list
-  $('.message__close--apartment').on('click', function () {
-
-    $('.apartment__sub--block.active').removeClass('active');
-
-    // Reset apartment__sub--block
-    $('.apartment__sub--block.block__list').addClass('active');
-
-  });
-
-
 
   // View all in mobile
   $('#apartmentViewAll').on('click', function () {
@@ -391,15 +374,31 @@ function initApartmentDetail(index) {
 
   // Submit contact event fake success
   $('#btnConactSubmit').on('click', function () {
+    $('.page').addClass('blur');
     $('.message__onpage').addClass('active');
   });
 
   // Close message onepage
   $('.message__close--onpage').on('click', function () {
+    $('.page').removeClass('blur');
     $('.message__onpage').removeClass('active');
 
   });
 
+  // Scrol to section
+  
+  $('.nav-menu li').on('click', function () {
+    const section = $(this).attr('data-page');
+    if($('*[data-section='+ section +']')) {
+      $('.header').removeClass('open-menu');
+      $('html, body').removeClass('no-scroll');
+      const top = $('*[data-section='+ section +']').offset().top;
+      $('html, body').animate({
+        scrollTop: top
+    }, 500);
+    }
+
+  });
 
 
 
