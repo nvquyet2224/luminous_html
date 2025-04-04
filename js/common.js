@@ -54,22 +54,10 @@ function navClick() {
 // Fake data for view detail
 const apartments = [
   {
-    name: 'Căn hộ',
-    value: 17,
-    information: [
-      {
-        name: 'price',
-        value: '230 m vnd'
-      },
-      {
-        name: 'size',
-        value: '989 sq.ft.'
-      },
-      {
-        name: 'layout',
-        value: '2x2 A'
-      }
-    ],
+    slogan: 'Duyên dáng, gọn gàng',
+    name: 'Danube',
+    information: ['1PN', '32.55 - 78.61 m<sup>2</sup>', '31 căn', 'Tầng 8-15'],
+    content: 'Không gian sống hiện đại, hòa mình vào thiên nhiên với thiết kế xanh độc đáo. Căn hộ mang đến trải nghiệm tiện nghi, sang trọng, tích hợp công nghệ thông minh, cùng hệ thống tiện ích đẳng cấp.',
     floor: [
       {
         thumb: 'images/apartment-floor.png'
@@ -81,22 +69,10 @@ const apartments = [
     mapPath: 'images/apartment-map.png'
   },
   {
-    name: 'Căn hộ',
-    value: 22,
-    information: [
-      {
-        name: 'price',
-        value: '230 m vnd'
-      },
-      {
-        name: 'size',
-        value: '989 sq.ft.'
-      },
-      {
-        name: 'layout',
-        value: '2x2 A'
-      }
-    ],
+    slogan: 'Sung túc, chan hòa',
+    name: 'nile',
+    information: ['2PN', '73.10-91.86 m<sup>2</sup>', '26 căn', 'Tầng 8-15'],
+    content: 'Không gian sống hiện đại, hòa mình vào thiên nhiên với thiết kế xanh độc đáo. Căn hộ mang đến trải nghiệm tiện nghi, sang trọng, tích hợp công nghệ thông minh, cùng hệ thống tiện ích đẳng cấp.',
     floor: [
       {
         thumb: 'images/apartment-floor.png'
@@ -108,22 +84,10 @@ const apartments = [
     mapPath: 'images/apartment-map.png'
   },
   {
-    name: 'Căn hộ',
-    value: 112,
-    information: [
-      {
-        name: 'price',
-        value: '230 m vnd'
-      },
-      {
-        name: 'size',
-        value: '989 sq.ft.'
-      },
-      {
-        name: 'layout',
-        value: '2x2 A'
-      }
-    ],
+    slogan: 'Rộng lớn, sống động',
+    name: 'amazon',
+    information: ['3PN', '101.54-123.34 m<sup>2</sup>', '4 căn', 'Tầng 16'],
+    content: 'Không gian sống hiện đại, hòa mình vào thiên nhiên với thiết kế xanh độc đáo. Căn hộ mang đến trải nghiệm tiện nghi, sang trọng, tích hợp công nghệ thông minh, cùng hệ thống tiện ích đẳng cấp.',
     floor: [
       {
         thumb: 'images/apartment-floor.png'
@@ -135,22 +99,10 @@ const apartments = [
     mapPath: 'images/apartment-map.png'
   },
   {
-    name: 'Căn hộ',
-    value: 24,
-    information: [
-      {
-        name: 'price',
-        value: '230 m vnd'
-      },
-      {
-        name: 'size',
-        value: '989 sq.ft.'
-      },
-      {
-        name: 'layout',
-        value: '2x2 A'
-      }
-    ],
+    slogan: 'Hùng vĩ, mạnh mẽ',
+    name: 'victoria',
+    information: ['Penthouse', '473.42 m<sup>2</sup>', '1 căn', 'Tầng 17'],
+    content: 'Không gian sống hiện đại, hòa mình vào thiên nhiên với thiết kế xanh độc đáo. Căn hộ mang đến trải nghiệm tiện nghi, sang trọng, tích hợp công nghệ thông minh, cùng hệ thống tiện ích đẳng cấp.',
     floor: [
       {
         thumb: 'images/apartment-floor.png'
@@ -168,22 +120,22 @@ function initApartmentDetail(index) {
   const apartment = apartments[ind];
 
   // Update apartment detail
-  $('#apartmentDetailTitle').html(apartment.name);
-  $('#apartmentDetailValue').html(apartment.value);
+  $('#apartmentDetailTitle').html(apartment.slogan);
+  $('#apartmentDetailValue').html(apartment.name);
   $('#apartmentDetailMap').attr('src', apartment.mapPath);
 
   let informationHtml = '';
   for (let info of apartment.information) {
     informationHtml += `
      <div class="information__item">
-        <span class="information__title">${info.name}</span>
-        <span class="information__value">${info.value}</span>
+        <span class="information__value">${info}</span>
     </div>
     `;
   }
 
   $('#apartmentDetailInfomation').html(informationHtml);
-
+  $('#apartmentDetailContent').html(apartment.content);
+  
 
   let galleryItem = '';
   for (let fl of apartment.floor) {
@@ -294,25 +246,6 @@ function initApartmentDetail(index) {
 
   });
 
-  $('.apartment__sub--item').on('mouseover', function () {
-    if ($(window).width() > 1024) {
-      let index = $(this).attr('data-index');
-      $('.apartment__main--img img.active').removeClass('active');
-      $('.apartment__main--img img[data-index=' + index + ']').addClass('active');
-    }
-  })
-
-
-  // Back to apartment list
-  $('#backToApartmentList').on('click', function () {
-
-    $('.apartment__sub--block.active').removeClass('active');
-
-    // Reset apartment__sub--block
-    $('.apartment__sub--block.block__list').addClass('active');
-
-
-  });
 
   // Open Order form
   $('.but-order').on('click', function () {
@@ -322,10 +255,11 @@ function initApartmentDetail(index) {
   // Close form and back to list [ or detail ]
   $('.order-form--close').on('click', function () {
 
-    $('.apartment__sub--block.active').removeClass('active');
+    $('.apartment__sub--block.active, .apartment__main--img img.active').removeClass('active');
 
     // Reset apartment__sub--block
     $('.apartment__sub--block.block__list').addClass('active');
+    $('.apartment__main--img img:nth-child(1)').addClass('active');
 
   });
 
@@ -338,9 +272,10 @@ function initApartmentDetail(index) {
 
   // View all in mobile
   $('#apartmentViewAll').on('click', function () {
-    $('.apartment__sub--block.active').removeClass('active');
+    $('.apartment__sub--block.active, .apartment__main--img img.active').removeClass('active');
     $('.apartment__sub').addClass('active');
     $('.apartment__sub--block.block__list').addClass('active');
+    $('.apartment__main--img img:nth-child(1)').addClass('active');
   });
 
   // Close block_list and back to main screen
@@ -351,10 +286,11 @@ function initApartmentDetail(index) {
   // Close detail and back to block__list
   $('#closeDetail').on('click', function () {
 
-    $('.apartment__sub--block.active').removeClass('active');
+    $('.apartment__sub--block.active, .apartment__main--img img.active').removeClass('active');
 
     // Reset apartment__sub--block
     $('.apartment__sub--block.block__list').addClass('active');
+    $('.apartment__main--img img:nth-child(1)').addClass('active');
 
   });
 
