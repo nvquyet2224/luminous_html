@@ -6,7 +6,7 @@ function apartmentSwiper() {
     new modules.Swiper(".detailSlider", {
       modules: [modules.Pagination],
       effect: "slide",
-      loop: true,
+      loop: false,
       speed: 1000,
       preloadImages: false,
       lazy: true,
@@ -60,10 +60,7 @@ const apartments = [
     content: 'Không gian sống hiện đại, hòa mình vào thiên nhiên với thiết kế xanh độc đáo. Căn hộ mang đến trải nghiệm tiện nghi, sang trọng, tích hợp công nghệ thông minh, cùng hệ thống tiện ích đẳng cấp.',
     floor: [
       {
-        thumb: 'images/apartment-floor.png'
-      },
-      {
-        thumb: 'images/apartment-floor.png'
+        thumb: 'images/danube-detail.jpg'
       }
     ],
     mapPath: 'images/apartment-map.png'
@@ -75,10 +72,7 @@ const apartments = [
     content: 'Không gian sống hiện đại, hòa mình vào thiên nhiên với thiết kế xanh độc đáo. Căn hộ mang đến trải nghiệm tiện nghi, sang trọng, tích hợp công nghệ thông minh, cùng hệ thống tiện ích đẳng cấp.',
     floor: [
       {
-        thumb: 'images/apartment-floor.png'
-      },
-      {
-        thumb: 'images/apartment-floor.png'
+        thumb: 'images/nile-detail.jpg'
       }
     ],
     mapPath: 'images/apartment-map.png'
@@ -90,10 +84,7 @@ const apartments = [
     content: 'Không gian sống hiện đại, hòa mình vào thiên nhiên với thiết kế xanh độc đáo. Căn hộ mang đến trải nghiệm tiện nghi, sang trọng, tích hợp công nghệ thông minh, cùng hệ thống tiện ích đẳng cấp.',
     floor: [
       {
-        thumb: 'images/apartment-floor.png'
-      },
-      {
-        thumb: 'images/apartment-floor.png'
+        thumb: 'images/amazon-detail.jpg'
       }
     ],
     mapPath: 'images/apartment-map.png'
@@ -105,10 +96,16 @@ const apartments = [
     content: 'Không gian sống hiện đại, hòa mình vào thiên nhiên với thiết kế xanh độc đáo. Căn hộ mang đến trải nghiệm tiện nghi, sang trọng, tích hợp công nghệ thông minh, cùng hệ thống tiện ích đẳng cấp.',
     floor: [
       {
-        thumb: 'images/apartment-floor.png'
+        thumb: 'images/victoria-detail1.jpg'
       },
       {
-        thumb: 'images/apartment-floor.png'
+        thumb: 'images/victoria-detail2.jpg'
+      },
+      {
+        thumb: 'images/victoria-detail3.jpg'
+      },
+      {
+        thumb: 'images/victoria-detail4.jpg'
       }
     ],
     mapPath: 'images/apartment-map.png'
@@ -205,16 +202,22 @@ function initApartmentDetail(index) {
   $(document).on('click', function (event) {
     if (!$(event.target).closest('.is-dropdown, .select, .language, .share-but').length) {
       // Nếu click bên ngoài phần tử với id 'yourElement'
-      console.log('Clicked outside!');
       $('.open').removeClass('open');
     }
   });
 
-
-  // Scroll to contact
-  $('#btnScrollToOrder').on('click', function () {
+ // open side order form + change title form
+  $('#btnOrderSideForm').on('click', function () {
+    $('#orderFormTitle').html(`nhận thông tin <br>về căn hộ luminous 141`);
     $('.side').addClass('active');
   });
+
+  // open side order form + change title form
+  $('#leaseBut').on('click', function () {
+    $('#orderFormTitle').html(`thuê văn phòng`);
+    $('.side').addClass('active');
+  });
+  
 
   // Close side form
   $('.side--close').on('click', function () {
