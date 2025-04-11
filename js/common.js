@@ -60,7 +60,10 @@ const apartments = [
     content: 'Không gian sống hiện đại, hòa mình vào thiên nhiên với thiết kế xanh độc đáo. Căn hộ mang đến trải nghiệm tiện nghi, sang trọng, tích hợp công nghệ thông minh, cùng hệ thống tiện ích đẳng cấp.',
     floor: [
       {
-        thumb: 'images/danube-detail.jpg'
+        thumb: 'images/danube-detail1.jpg'
+      },
+      {
+        thumb: 'images/danube-detail2.jpg'
       }
     ],
     mapPath: 'images/apartment-map.png'
