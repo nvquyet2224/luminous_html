@@ -222,7 +222,7 @@ function initApartmentDetail(index) {
 
  // open side order form + change title form
   $('#btnOrderSideForm, .but-order').on('click', function () {
-    $('#orderFormTitle').html(`nhận thông tin <br>về căn hộ luminous 141`);
+    $('#orderFormTitle').html(`nhận thông tin <br>về căn hộ luminous <span class="number number__font">141</span>`);
     $('body').addClass('no-scroll');
     $('.side').addClass('active');
   });
