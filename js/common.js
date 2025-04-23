@@ -1,6 +1,29 @@
 const modules = index.modules;
 const $ = modules.$;
 
+let scrollPosition = 0;
+function togglePopup(show) {
+  console.log(window.scrollY);
+  const body = document.body;
+
+  if (show) {
+    // Lưu vị trí cuộn hiện tại
+    scrollPosition = window.scrollY;
+    // Gắn lớp no-scroll và giữ vị trí
+    //body.style.position = 'fixed';
+    $('body').addClass('no-scroll');
+    body.style.top = `-${scrollPosition}px`;
+    //body.style.width = '100%';
+  } else {
+    // Gỡ lớp no-scroll và khôi phục vị trí cuộn
+    //body.style.position = '';
+    //body.style.top = '';
+    $('body').removeClass('no-scroll');
+    window.scrollTo(0, scrollPosition); // Đặt lại vị trí cuộn
+  }
+}
+
+
 function apartmentSwiper() {
   if (document.querySelector(".detailSlider")) {
     new modules.Swiper(".detailSlider", {
@@ -36,8 +59,9 @@ function navClick() {
   if (document.querySelector(".toggle-menu")) {
     document.querySelector(".toggle-menu").addEventListener("click", () => {
       const menu = document.querySelector(".header");
-      document.querySelector("html, body").classList.add("no-scroll");
+      //document.querySelector("body").classList.add("no-scroll");
       menu.classList.add("open-menu");
+      togglePopup(true);
     });
   }
   // Close menu
@@ -45,7 +69,8 @@ function navClick() {
     document.querySelector(".close-menu").addEventListener("click", () => {
       const menu = document.querySelector(".header");
       menu.classList.remove("open-menu");
-      document.querySelector("html, body").classList.remove("no-scroll");
+      //document.querySelector("body").classList.remove("no-scroll");
+      togglePopup(false);
     });
   }
 
@@ -174,7 +199,7 @@ function initApartmentDetail(index) {
 (function () {
   navClick();
   apartmentSwiper();
-
+ 
   // Open dropdown
   $('.is-dropdown').on('click', function () {
     if ($(this).parent().hasClass('open')) {
@@ -221,24 +246,35 @@ function initApartmentDetail(index) {
   });
 
  // open side order form + change title form
-  $('#btnOrderSideForm, .but-order').on('click', function () {
+  $('#btnOrderSideForm').on('click', function () {
     $('#orderFormTitle').html(`nhận thông tin <br>về căn hộ luminous <span class="number number__font">141</span>`);
-    $('body').addClass('no-scroll');
+    //$('body').addClass('no-scroll');
     $('.side').addClass('active');
+    togglePopup(true);
+  });
+
+  // Cần phài tách ra để xử lý trên ios
+  $('.but-order').on('click', function () {
+    $('#orderFormTitle').html(`nhận thông tin <br>về căn hộ luminous <span class="number number__font">141</span>`);
+    //$('body').addClass('no-scroll');
+    $('.side').addClass('active');
+    // chỗ này không cần off scroll
   });
 
   // open side order form + change title form
   $('#leaseBut').on('click', function () {
     $('#orderFormTitle').html(`thuê văn phòng`);
-    $('body').addClass('no-scroll');
+    //$('body').addClass('no-scroll');
     $('.side').addClass('active');
+    togglePopup(true);
   });
   
 
   // Close side form
   $('.side--close').on('click', function () {
-    $('body').removeClass('no-scroll');
+    //$('body').removeClass('no-scroll');
     $('.side').removeClass('active');
+    togglePopup(false);
   });
 
 
@@ -263,13 +299,10 @@ function initApartmentDetail(index) {
       }, 30);
     });
 
+    // chỗ này không cần off scroll
+
   });
 
-
-  // Open Order form
-  // $('.but-order').on('click', function () {
-  //   $('.side').addClass('active');
-  // });
 
   // Close form and back to list [ or detail ]
   $('.order-form--close').on('click', function () {
@@ -292,16 +325,18 @@ function initApartmentDetail(index) {
   // View all in mobile
   $('#apartmentViewAll').on('click', function () {
     $('.apartment__sub--block.active, .apartment__main--img img.active').removeClass('active');
-    $('body').addClass('no-scroll');
+    //$('body').addClass('no-scroll');
     $('.apartment__sub').addClass('active');
     $('.apartment__sub--block.block__list').addClass('active');
     $('.apartment__main--img img:nth-child(1)').addClass('active');
+    togglePopup(true);
   });
 
   // Close block_list and back to main screen
   $('#backToMainScreen').on('click', function () {
-    $('body').removeClass('no-scroll');
+    //$('body').removeClass('no-scroll');
     $('.apartment__sub').removeClass('active');
+    togglePopup(false);
   });
 
   // Close detail and back to block__list
@@ -323,13 +358,12 @@ function initApartmentDetail(index) {
 
     let index = $(this).attr('data-index');
     $('.apartment__sub--block.active').removeClass('active');
-    $('body').addClass('no-scroll');
     $('.apartment__sub').addClass('active');
     $('.apartment__sub--block.block__detail').addClass('active');
     
     // Trigger to build apartment detail
     $('.select__box li[data-index=' + index + ']').trigger('click');
-
+    togglePopup(true);
     // Scroll to top
     const top = $('.apartment__box').offset().top;
     $('html, body').animate({ scrollTop: top }, 350, function () {
@@ -353,15 +387,17 @@ function initApartmentDetail(index) {
   // Submit contact event fake success
   $('#btnConactSubmit').on('click', function () {
     $('.page').addClass('blur');
-    $('body').addClass('no-scroll');
+    //$('body').addClass('no-scroll');
     $('.message__onpage').addClass('active');
+    togglePopup(true);
   });
 
   // Close message onepage
   $('.message__close--onpage').on('click', function () {
     $('.page').removeClass('blur');
-    $('body').removeClass('no-scroll');
+    //$('body').removeClass('no-scroll');
     $('.message__onpage').removeClass('active');
+    togglePopup(false);
 
   });
 
