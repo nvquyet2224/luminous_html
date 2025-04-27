@@ -166,7 +166,7 @@ function initApartmentDetail(index) {
   for (let fl of apartment.floor) {
     galleryItem += `
       <div class="swiper-slide">
-        <img fetchpriority="low" loading="lazy" width="447" height="257"
+        <img fetchpriority="low" loading="lazy" data-fancybox="gallery" data-caption="" width="447" height="257"
             src="${fl.thumb}" alt="detail">
       </div>
       `
@@ -187,6 +187,17 @@ function initApartmentDetail(index) {
   // Build gallery slider
   setTimeout(function () {
     apartmentSwiper();
+  
+    // Create Fancybox
+    Fancybox.bind("[data-fancybox]", {
+      // Các tùy chọn cấu hình thêm
+      Thumbs: {
+        autoStart: true, // Bật thumbnail preview
+      },
+      Toolbar: {
+        display: ["zoom", "close"], // Các nút trong toolbar
+      }
+    });
     
     setTimeout(function(){
       $('.block__detail.active .apartment__sub--detail').animate({ scrollTop: top }, 0, function () {});
