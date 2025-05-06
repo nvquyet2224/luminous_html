@@ -160,7 +160,7 @@ function initApartmentDetail(index) {
 
   $('#apartmentDetailInfomation').html(informationHtml);
   $('#apartmentDetailContent').html(apartment.content);
-  
+
 
   let galleryItem = '';
   for (let fl of apartment.floor) {
@@ -187,7 +187,7 @@ function initApartmentDetail(index) {
   // Build gallery slider
   setTimeout(function () {
     apartmentSwiper();
-  
+
     // Create Fancybox
     Fancybox.bind("[data-fancybox]", {
       // Các tùy chọn cấu hình thêm
@@ -198,19 +198,40 @@ function initApartmentDetail(index) {
         display: ["zoom", "close"], // Các nút trong toolbar
       }
     });
-    
-    setTimeout(function(){
-      $('.block__detail.active .apartment__sub--detail').animate({ scrollTop: top }, 0, function () {});
-    },50);
+
+    setTimeout(function () {
+      $('.block__detail.active .apartment__sub--detail').animate({ scrollTop: top }, 0, function () { });
+    }, 50);
 
   }, 150);
 
 }
 
+function isIPhone() {
+  return /iPhone/i.test(navigator.userAgent);
+}
+
+function heroVideo() {
+  if(isIPhone()) {
+    $(document).on('click touchstart', function () {
+      const video = document.querySelector('.banner video');
+      if(video.paused) {
+        video.play();
+      }
+    });
+  } else {
+    const video = document.querySelector('.banner video');
+    if(video.paused) {
+      video.play();
+    }
+  }
+}
 (function () {
   navClick();
   apartmentSwiper();
- 
+  heroVideo();
+
+
   // Open dropdown
   $('.is-dropdown').on('click', function () {
     if ($(this).parent().hasClass('open')) {
@@ -239,12 +260,12 @@ function initApartmentDetail(index) {
     $('.apartment__drop h3').html(text);
     $('.open').removeClass('open');
     setTimeout(() => {
-      
+
     }, 100);
-    
+
     // Change image
     $('.apartment__main--img img.active').removeClass('active');
-    $('.apartment__main--img img[data-index='+ index +']').addClass('active');
+    $('.apartment__main--img img[data-index=' + index + ']').addClass('active');
   });
 
 
@@ -256,7 +277,7 @@ function initApartmentDetail(index) {
     }
   });
 
- // open side order form + change title form
+  // open side order form + change title form
   $('#btnOrderSideForm').on('click', function () {
     $('#orderFormTitle').html(`nhận thông tin <br>về căn hộ luminous <span class="number number__font">141</span>`);
     //$('body').addClass('no-scroll');
@@ -279,7 +300,7 @@ function initApartmentDetail(index) {
     $('.side').addClass('active');
     togglePopup(true);
   });
-  
+
 
   // Close side form
   $('.side--close').on('click', function () {
@@ -295,7 +316,7 @@ function initApartmentDetail(index) {
 
     $('.apartment__main--img img.active, .apartment__sub--block.active').removeClass('active');
     $('.apartment__main--img img[data-index=' + index + ']').addClass('active');
-    
+
     // Reset apartment__sub--block
     $('.apartment__sub--block.block__detail').addClass('active');
 
@@ -371,7 +392,7 @@ function initApartmentDetail(index) {
     $('.apartment__sub--block.active').removeClass('active');
     $('.apartment__sub').addClass('active');
     $('.apartment__sub--block.block__detail').addClass('active');
-    
+
     // Trigger to build apartment detail
     $('.select__box li[data-index=' + index + ']').trigger('click');
     togglePopup(true);
