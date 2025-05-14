@@ -1,1 +1,12 @@
-@font-face{font-family:"AvenirNext";src:url(../fonts/AvenirNext-Regular.woff2) format("woff2"),url(../fonts/AvenirNext-Regular.woff) format("woff"),url(../fonts/AvenirNext-Regular.ttf) format("truetype");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:"AvenirNext";src:url(../fonts/AvenirNext-Medium.woff2) format("woff2"),url(../fonts/AvenirNext-Medium.woff) format("woff"),url(../fonts/AvenirNext-Medium.ttf) format("truetype");font-weight:500;font-style:normal;font-display:swap}
+.wb__leading {
+    display: flex;
+    flex-wrap: wrap;
+}
+.wb__leading .vc_vc_column:nth-child(1) {
+    flex: 0 0 43.52574102964119%;
+    max-width: 43.52574102964119%;
+}
+.wb__leading .vc_vc_column:nth-child(2) {
+    flex: 0 0 56.47425897035881%;
+    max-width: 56.47425897035881%;
+}
