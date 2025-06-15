@@ -1,3 +1,6 @@
 1: Tên project
 2: danh sách thẻ gán với project này
 3: danh sách hình ảnh đính kèm đi với project này
+
+https://www.figma.com/design/ZCP6uawFNZ1Xl0jy9c4sZs/AAVN---Landing-page?node-id=0-1&t=VAOp9LT5jIMfdJYU-1
+https://www.aavn.edu.vn/19727-2/
