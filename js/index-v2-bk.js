@@ -1,7 +1,7 @@
 (function () {
         if (typeof jQuery !== "undefined" && typeof jQuery.fn.slick !== "undefined") {
             jQuery('.wb__believe--slider').slick({
-                infinite: true,
+                infinite: false,
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 dots: true,
